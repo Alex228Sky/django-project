@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib import auth
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 def index(request):
@@ -23,5 +26,9 @@ def register(request):
 
 	context = {'form' : form}
 	return render(request, 'registration/register.html', context)
+
+def logout(request):
+	auth.logout(request)
+	return HttpResponseRedirect('/')
 
 
