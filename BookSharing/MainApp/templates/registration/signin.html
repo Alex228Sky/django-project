@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    </head>
+    <body>
+
+
+
+      <header>
+    		{% include 'includes/header.html' %}
+    	</header>
+
+
+      {% if messages %}
+      {% for message in messages%}
+      <div class="alert alert-{{message.tags}}">
+        {{ message }}
+
+      </div>
+      {% endfor %}
+      {% endif %}
+      <div class="container">
+        <div class="row">
+          <div class="card col s6 offset-s3">
+
+            <div class="row">
+              <h2 class="center-align">Регистрация</h2>
+            </div>
+            <div class="row">
+              <form method="post" action="{% url 'signin' %}">
+                {% csrf_token %}
+                {% if for.errors %}
+                <p>Error</p>
+                {% endif %}
+
+              	  <div class="input-field col s10 offset-s1">
+                  <i class="material-icons prefix">contact_mail</i>
+                  <input type="email" name="email" required id="id_email" placeholder="Почта">
+                  <!--<label for="email">Почта</label>-->
+                  </div>
+                  <div class="input-field col s10 offset-s1">
+                  <input type="text" name="first_name" maxlength="100" required id="id_first_name" placeholder="Имя">
+                  </div>
+                  <div class="input-field col s10 offset-s1">
+                  <input type="text" name="last_name" maxlength="100" required id="id_last_name" placeholder="Фамилия">
+                  </div>
+                <div class="input-field col s10 offset-s1">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input type="text" name="username" maxlength="150" autofocus required id="id_username" placeholder="Логин">
+                  <!--<label for="login">Логин</label>-->
+                </div>
+                <div class="input-field col s10 offset-s1">
+                  <i class="material-icons prefix">lock</i>
+                  <input type="password" name="password1" required id="id_password1" placeholder="Пароль">
+                  <!--<label for="password">Пароль</label>-->
+                </div>
+                <div class="input-field col s10 offset-s1">
+                  <i class="material-icons prefix">lock</i>
+                  <input type="password" name="password2" required id="id_password2" placeholder="Пароль еще раз">
+                  <!--<label for="password">Пароль</label>-->
+                </div>
+                <div class="row">
+                  <input class="waves-effect waves-light btn col s6 offset-s3"  type="submit" value="Register">
+                </div>
+              </form>
+            </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+  </html>
