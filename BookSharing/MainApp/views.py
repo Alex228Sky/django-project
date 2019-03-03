@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm, Addbook
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponseNotFound
 from django.forms import modelformset_factory
 from .models import Books
 from django.views.decorators.csrf import csrf_exempt
@@ -46,13 +46,23 @@ def lib(reqest):
         instance.save()
         #current_user = reqest.user
         #print(current_user.id)
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/')  
     book = Books.objects.filter(user_id=reqest.user)
     return render(reqest,'lib.html',{'form' : form,'book': book})
 
 def account(reqest):
     return render(reqest,'account.html')
 
-def logout(request):
-	auth.logout(request)
+def logout(reqest):
+	auth.logout(reqest)
 	return HttpResponseRedirect('/')
+
+def delete(reqest,id):
+    try:
+
+        book = Books.objects.get(id=id)
+        book.delete()
+        return HttpResponseRedirect("/lib")
+    except Person.DoesNotExist:
+        return HttpResponseNotFound("<h2>Person not found</h2>")
+

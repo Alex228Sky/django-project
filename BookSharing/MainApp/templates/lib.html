@@ -22,11 +22,13 @@ h3
 <body>
 	{% if user.is_authenticated %}
 	{% include 'includes/header.html' %}
-	{% for i in book %}
 	<h3>Мои книги</h3>
+	
+	
 		<main>
 	<div class="container main-container">
 	<div class="row">
+		{% for i in book %}
 			<div class="col m4 l3">
 				<div class="card medium">
 					<div class="card-image waves-effect waves-block waves-light">
@@ -39,11 +41,11 @@ h3
 					<div class="card-content">
 						<span class="card-title activator grey-text text-darken-4">{{ i.book }}<i class="material-icons right">more_vert</i></span>
 						<p>{{ i.dis }}</p>
+						<a href="/delete/{{i.id}}"><i class="material-icons prefix green-text">restore_from_trash</i></a>		
 					</div>
 					<div class="card-reveal">
-						<span class="card-title grey-text text-darken-4">Контакты<i class="material-icons right">close</i></span>
+						<span class="card-title grey-text text-darken-4">Описание<i class="material-icons right">close</i></span>
 						<p>{{ i.cont }}</p>
-						
 					</div>
 				</div>
 			</div>
@@ -63,7 +65,7 @@ h3
 						<div class="input-field col s10 offset-s1">
 							<i class="material-icons prefix green-text">book</i>
 							<label for="id_book">Название</label>
-							<input type="text" name="book" maxlength="120" required id="id_book">
+							<input type="text" name="book" maxlength="20" required id="id_book">
 						</div>
 						<div class="input-field col s10 offset-s1">
 							<i class="material-icons prefix green-text">account_circle</i>
@@ -73,7 +75,7 @@ h3
 						<div class="input-field col s10 offset-s1">
 							<i class="material-icons prefix green-text">phone</i>
 							<label for="id_cont">Контакты</label>
-							<input type="text" name="cont" maxlength="130" required id="id_cont">
+							<input type="text" name="cont" maxlength="30" required id="id_cont">
 							<input type="hidden" name="form-0-id" id="id_form-0-id">
 						</div>
 						<div class="file-field input-field col s10 offset-s1">
