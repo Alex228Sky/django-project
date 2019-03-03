@@ -1,84 +1,106 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      {% load static %}
-      <link rel="stylesheet" href="{% static 'css/signin.css' %}">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    </head>
-    <body>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Регистрация</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div id="card" class="card col s10 offset-s1 m8 offset-m2 l6 offset-l3 xl6 offset-xl3">
+        <h3 class="center-align">Регистрация</h3>
+        <form method="post" action="{% url 'signin' %}">
+          <div class="row">
+            {% csrf_token %}           
+            {% if for.errors %}
+            <p>Error</p>
+            {% endif %}
 
 
 
-      <header>
-    		{% include 'includes/header.html' %}
-    	</header>
-
-
-      {% if messages %}
-      {% for message in messages%}
-      <div class="alert alert-{{message.tags}}">
-        {{ message }}
-
-      </div>
-      {% endfor %}
-      {% endif %}
-      <div class="container">
-        <div class="row">
-          <div class="card col s6 offset-s3">
-
-            <div class="row">
-              <h2 class="center-align">Регистрация</h2>
+            <div class="input-field col s10 offset-s1">
+              <i class="material-icons prefix green-text">account_circle</i>
+              <input id="login" type="text" name="username" maxlength="150" autofocus>
+              <label for="login" class="grey-text unselectable">Логин</label>
             </div>
-            <div class="row">
-              <form method="post" action="{% url 'signin' %}">
-                {% csrf_token %}
-                {% if for.errors %}
-                <p>Error</p>
-                {% endif %}
-
-              	  <div class="input-field col s10 offset-s1">
-                  <i class="material-icons prefix">contact_mail</i>
-                  <input type="email" name="email" required id="id_email" placeholder="Почта">
-                  <!--<label for="email">Почта</label>-->
-                  </div>
-                  <div class="input-field col s10 offset-s1">
-                  <input type="text" name="first_name" maxlength="100" required id="id_first_name" placeholder="Имя">
-                  </div>
-                  <div class="input-field col s10 offset-s1">
-                  <input type="text" name="last_name" maxlength="100" required id="id_last_name" placeholder="Фамилия">
-                  </div>
-                <div class="input-field col s10 offset-s1">
-                  <i class="material-icons prefix">account_circle</i>
-                  <input type="text" name="username" maxlength="150" autofocus required id="id_username" placeholder="Логин">
-                  <!--<label for="login">Логин</label>-->
-                </div>
-                <div class="input-field col s10 offset-s1">
-                  <i class="material-icons prefix">lock</i>
-                  <input type="password" name="password1" required id="id_password1" placeholder="Пароль">
-                  <!--<label for="password">Пароль</label>-->
-                </div>
-                <div class="input-field col s10 offset-s1">
-                  <i class="material-icons prefix">lock</i>
-                  <input type="password" name="password2" required id="id_password2" placeholder="Пароль еще раз">
-                  <!--<label for="password">Пароль</label>-->
-                </div>
-                <div class="row">
-                  <input class="waves-effect waves-light btn col s6 offset-s3"  type="submit" value="Register">
-                </div>
-              </form>
+            <div class="input-field col s10 offset-s1">
+              <i class="material-icons prefix green-text">mail</i>
+              <input id="email" type="email" name="email" required>
+              <label for="email" class="grey-text">Почта</label>
+            </div>
+            <div class="input-field col s10 offset-s1 m4 offset-m1">
+              <i class="material-icons prefix green-text">person</i>
+              <input id="first_name" type="text" name="first_name" maxlength="100" required>
+              <label for="first_name" class="grey-text">Имя</label>
             </div>
 
-
+            <div class="input-field col s10 offset-s1 m6 offset-m0">
+              <input id="last_name" type="text" name="last_name" maxlength="100" required>
+              <label for="last_name" class="grey-text">Фамилия</label>
             </div>
+            <div class="input-field col s10 offset-s1">
+              <i class="material-icons prefix green-text">lock</i>
+              <input id="password" type="password" name="password1" required id="id_password1">
+              <label for="password" class="grey-text">Пароль</label>
+              <div class="helper-text" data-error="Минимум строчная, прописная буква, цифра. Длина: 8-16."></div>
+                        <ul>
+              <li>Ваш пароль не может быть слишком похож на другие ваши личные данные.</li>
+              <li>Ваш пароль должен содержать не менее 8 символов.</li>
+              <li>Ваш пароль не может быть полностью цифровым.</li>
+            </ul>
+            </div>
+            <div class=" input-field col s10 offset-s1">
+              <i class="material-icons prefix green-text">repeat</i>
+              <input id="password_again" type="password" name="password2" required id="id_password2">
+              <label for="password" class="grey-text">Повторите пароль</label>
+              <div class="helper-text" data-error="Минимум строчная, прописная буква, цифра. Длина: 8-16."></div>
+            </div>
+              <div class=" row col1 s6">
+                <button type="submit" class="green waves-effect waves-light btn col s8 offset-s2">Зарегистрироваться</button>
+              </div>
           </div>
-        </div>
+        </form>
       </div>
+    </div>
+  </div>
 
+  <!-- Modal Trigger -->
+  <!--<a class="waves-effect waves-light btn modal-trigger" href="#successful">successful</a>-->
+  <!--<a class="waves-effect waves-light btn modal-trigger" href="#fail">fail</a>-->
 
+  <!-- Modal Structure -->
+  <div id="successful" class="modal">
+    <div class="modal-content">
+      <h4>Поздравляем!</h4>
+      <p>Вы успешно прошли регистрацию. Теперь вы можете войти и начать пользоваться сайтом.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ок</a>
+    </div>
+  </div>
+  <!-- Modal Structure -->
+  <div id="fail" class="modal">
+    <div class="modal-content">
+      <h4>Упс!</h4>
+      <p>Кажется, вы что-то ввели не так. Попробуйте ещё раз.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ок</a>
+    </div>
+  </div>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    </body>
-  </html>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="{% static 'js/common.js' %}"></script>
+</body>
+
+</html>

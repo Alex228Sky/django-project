@@ -25,7 +25,7 @@ SECRET_KEY = 'e96w@_1-naq_*kb8ve@meb28c&47+$0#y-!4k-y0suby4!+s82'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -120,3 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media_cdn')
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)

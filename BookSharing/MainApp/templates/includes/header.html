@@ -1,16 +1,51 @@
+<header class="unselectable">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}"></link>
+<div class="navbar-fixed hide-on-small-only">
 <nav>
-  <div class="nav-wrapper blue-grey darken-3">
+  <div class="navbar-fixed nav-wrapper blue-grey darken-3">
     <div class="container">
-      <a href="#" class="brand-logo">
-        <!-- Вставить лого -->
-        <img src="сюда лого вставить" alt="" width="50" height="50">
-        BookSharing
-      </a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#" class="waves-effect">Поблизости</a></li>
-        <li><a href="#" class="waves-effect">Поиск</a></li>
-        <li><a href="/accounts/login" class="waves-effect waves-light btn green">Войти</a></li>
+      <i class="right material-icons dropdown-trigger" data-target="dropdown1">menu</i>
+      <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        {% if user.is_authenticated %}
+        <li><a href="/lib" class="white-text waves-effect blue-grey darken-3">Мои книги</a></li>
+        <!--<li><a href="/account" class="white-text waves-effect blue-grey darken-3">Настройки аккаунта</a></li>-->
+        <li><a class="white-text waves-effect blue-grey darken-3" href='/logout' >Выйти</a></li>
+        {% else %}
+		    <li><a class="white-text waves-effect blue-grey darken-3" href='/accounts/login'>Войти</a></li>
+        {% endif %}
+        <li><a class="white-text waves-effect blue-grey darken-3" href="/about">О нас</a></li>
       </ul>
+      <a href="/" class="brand-logo left">BookSharing</a>
     </div>
   </div>
 </nav>
+</div>
+</header>
+
+<ul id="slide-out" class="sidenav unselectable">
+  {% if user.is_authenticated %}
+  <li><div class="user-view">
+    <div class="background blue-grey darken-3"></div>
+    <!-- Тут фото-затычка-->
+    <a href="/account"><img class="circle" src="{% static 'images/illuminatipizza.jpg' %}"></a>
+    <a href="/account"><span class="white-text name">{{user.last_name}}, {{user.first_name}}</span></a>
+    <a href="/account"><span class="white-text email">{{user.username}}</span></a>
+  </div></li>
+  <li><a class="waves-effect" href="/lib">Моя библиотека</a></li>
+  <li><a class="waves-effect" href="/account">Настройки аккаунта</a></li>
+  <li><a class="waves-effect" href="/about">О нас</a></li>
+  <li><a class="waves-effect" href="/logout">Выйти</a></li>
+  {% else %}
+  <!-- Вот тут странный кусок говнокода, но работает он так, как я хочу -->
+  <li><div class="user-view">
+    <div class="background white"></div>
+  </div></li>
+  <li><a class="waves-effect" href="/accounts/login">Войти</a></li>
+  <li><a class="waves-effect" href="/">Книги</a></li>
+  <li><a class="waves-effect" href="/about">О нас</a></li>
+  {% endif %}
+</ul>
+
+
