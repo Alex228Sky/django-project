@@ -5,9 +5,10 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('signin', views.signin, name='signin'),
     path('about', views.about, name='about'),
-    #path('chat', views.chat, name='chat'),
+    path('chat', views.chat, name='chat'),
     path('lib', views.lib, name='lib'),
     path('account', views.account, name='account'),
     path('logout', views.logout, name='logout'),
     path('delete/<int:id>/', views.delete, name='delete'),
+    path('edit/<int:id>/', views.edit),
 ]

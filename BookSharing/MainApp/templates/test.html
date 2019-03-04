@@ -1,1 +1,29 @@
-asdasdasd
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Модели в Django</title>
+</head>
+<body class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Изменить фото</label><br>
+            <input class="file-path validate" type="file" name="image" value="{{book.image}}" />
+        </p>
+        <p>
+            <label>Изменить название</label><br>
+            <input type="text" name="book" value="{{book.book}}" />
+        </p>
+        <p>
+            <label>Изменить автора</label><br>
+            <input type="text" name="dis" value="{{book.dis}}" />
+        </p>
+        <p>
+            <label>Изменить контакты</label><br>
+            <input type="text" name="cont" value="{{book.cont}}" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+</body>
+</html>

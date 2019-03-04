@@ -44,8 +44,6 @@ def lib(reqest):
         instance = form.save(commit=False)
         instance.user_id = reqest.user
         instance.save()
-        #current_user = reqest.user
-        #print(current_user.id)
         return HttpResponseRedirect('/')  
     book = Books.objects.filter(user_id=reqest.user)
     return render(reqest,'lib.html',{'form' : form,'book': book})
@@ -63,6 +61,23 @@ def delete(reqest,id):
         book = Books.objects.get(id=id)
         book.delete()
         return HttpResponseRedirect("/lib")
-    except Person.DoesNotExist:
-        return HttpResponseNotFound("<h2>Person not found</h2>")
+    except Books.DoesNotExist:
+        return HttpResponseNotFound("<h2>Books not found</h2>")
+
+def edit(reqest, id):
+    try:
+        book = Books.objects.get(id=id)
+        if reqest.method == "POST":
+            book.cont = reqest.POST.get("cont")
+            book.dis = reqest.POST.get("dis")
+            book.book = reqest.POST.get("book")
+            book.image = reqest.POST.get("image")
+            book.save()
+            return HttpResponseRedirect("/lib")
+        else:
+            return render(reqest, "test.html", {"book": book})
+    except Books.DoesNotExist:
+        return HttpResponseNotFound("<h2>Books not found</h2>")
+
+
 
